@@ -28,7 +28,7 @@ export function CampusCart() {
       </header>
       <div className="p-4">
         <div className="flex gap-2 mt-4 overflow-x-auto pb-2">
-          {["'All'", "'Textbooks'", "'Clothes'", "'Furniture'", "'Electronics'"].map((category) => (
+          {["All", "'Textbooks'", "'Clothes'", "'Furniture'", "'Electronics'"].map((category) => (
             <Button key={category} variant="outline" className="flex-shrink-0">
               {category}
             </Button>
@@ -46,20 +46,16 @@ export function CampusCart() {
             { title: "Laptop Stand", price: "$25", image: "/placeholder.svg?height=200&width=200" },
             { title: "Wireless Mouse", price: "$20", image: "/placeholder.svg?height=200&width=200" },
             { title: "Backpack", price: "$35", image: "/placeholder.svg?height=200&width=200" },
-          ].map((item, index) => (
+          ].map((post, index) => (
             <div key={index} className="border rounded-lg overflow-hidden">
-              <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
+              <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
               <div className="p-2">
-                <h3 className="font-semibold truncate">{item.title}</h3>
-                <p className="text-sm text-gray-600">{item.price}</p>
+                <h3 className="font-semibold truncate">{post.title}</h3>
+                <p className="text-sm text-gray-600">{post.price}</p>
                 <div className="flex justify-between mt-2">
                   <Button size="sm" variant="ghost">
                     <Heart className="h-4 w-4 mr-1" />
                     Save
-                  </Button>
-                  <Button size="sm" variant="ghost">
-                    <MessageCircle className="h-4 w-4 mr-1" />
-                    Chat
                   </Button>
                 </div>
               </div>
