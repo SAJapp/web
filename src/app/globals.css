@@ -17,3 +17,10 @@ body {
     --radius: 0.5rem;
   }
 }
+.pop-animation {
+  transition: transform 0.2s ease-in-out;
+}
+
+.pop-animation.active {
+  transform: scale(1.5); /* Makes the icon pop */
+}

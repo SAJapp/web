@@ -1,10 +1,39 @@
-"'use client'"
+"use client";
 
 import { Search, Filter, Bookmark , User, House } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { BookmarkCheck } from 'lucide-react';
+import { useState } from 'react'
 
 export function CampusCart() {
+
+  const [savedItems, setSavedItems] = useState({});
+  const [clicked, setClicked] = useState({}); // For managing the pop animation
+
+  // Function to toggle saving an item
+  const toggleSaveItem = (index) => {
+    setSavedItems((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+    // Trigger the pop animation
+  setClicked((prev) => ({
+    ...prev,
+    [index]: true,
+  }));
+
+  // Reset the pop animation after the duration of the animation
+  setTimeout(() => {
+    setClicked((prev) => ({
+      ...prev,
+      [index]: false,
+    }));
+  }, 200); // Should match the CSS transition time
+  };
+
+  
+
   return (
     (<div className="max-w-7xl mx-auto bg-white min-h-screen">
       <header
@@ -15,7 +44,7 @@ export function CampusCart() {
             <Input
               type="search"
               placeholder="Search for items..."
-              className="w-full pl-10 pr-12 py-2 borderborder-gray-300 rounded-full " />
+              className="w-full pl-10 pr-12 py-2 border border-gray-300 rounded-full " />
             <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
           </div>
         </div>
@@ -44,15 +73,24 @@ export function CampusCart() {
             { title: "Wireless Mouse", price: "$20", image: "/placeholder.svg?height=200&width=200" },
             { title: "Backpack", price: "$35", image: "/placeholder.svg?height=200&width=200" },
           ].map((post, index) => (
-            <div key={index} className="border rounded-lg overflow-hidden">
+            <div key={index} className="border rounded-lg overflow-visible">
               <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
               <div className="p-2">
                 <h3 className="font-semibold truncate">{post.title}</h3>
                 <p className="text-sm text-gray-600">{post.price}</p>
                 <div className="flex justify-end mt-2">
-                  <Button size="sm" variant="ghost">
-                    <Bookmark className="h-4 w-4 mr-1" />
-                    Save
+                <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => toggleSaveItem(index)}
+                    className={`pop-animation ${clicked[index] ? 'active' : ''}`} // Apply animation class
+                  >
+                    {savedItems[index] ? (
+                      <BookmarkCheck className="h-4 w-4 mr-1 text-red-600" /> // Filled and dark version of Bookmark
+                    ) : (
+                      <Bookmark className="h-4 w-4 mr-1 text-gray-400" /> // Default Bookmark
+                    )}
+                    {savedItems[index] ? "Saved" : "Save"}
                   </Button>
                 </div>
               </div>
@@ -85,4 +123,5 @@ export function CampusCart() {
       </nav>
     </div>)
   );
-}
+
+};
