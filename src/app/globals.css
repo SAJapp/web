@@ -10,6 +10,20 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Slide-down animation */
+  @keyframes slide-down {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-down {
+    animation: slide-down 0.5s ease-in-out forwards;
+  }
 }
 
 @layer base {
