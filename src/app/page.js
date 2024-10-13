@@ -15,7 +15,6 @@ export default function Home() {
     } catch (e) {
       console.warn("Error: ", e);
     }
-    console.log(postData);
   };
 
   useEffect(() => {

@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { createClient } from '@/util/supabase/client'
+
 import {
   Select,
   SelectContent,
@@ -16,7 +18,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { X } from "lucide-react"
 
 export function ItemListingPageComponent() {
+  const supabase = createClient();
   const [images, setImages] = useState([])
+  const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     price: '',
@@ -45,11 +49,29 @@ export function ItemListingPageComponent() {
   const handleSelectChange = (name) => (value) => {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
+  const fetchData = async () => {
+      const { data, error } = await supabase.auth.getUser();
+      if (data) {
+          setUser(data.user);
+      }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log("Form data:", { ...formData, images })
-    const res = await fetch(`/api/uploadPost`,{method:"POST", body: formData});
+    fetchData();
+    console.log(user);
+    const submitFormData = new FormData();
+    submitFormData.append('title', formData.title);
+    submitFormData.append('price', formData.price);
+    submitFormData.append('category', formData.category);
+    submitFormData.append('condition', formData.condition);
+    submitFormData.append('description', formData.description);
+    submitFormData.append('userID', user?.id);
+    const imageFiles = event.target.images.files;
+    for (let i = 0; i < imageFiles.length; i++) {
+      submitFormData.append('images', imageFiles[i]);
+    }
+    const res = await fetch(`/api/uploadPost`,{method:"POST", body: submitFormData});
   }
 
   return (

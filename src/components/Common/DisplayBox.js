@@ -2,11 +2,11 @@ import { Bookmark, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function DisplayBoxes({ post, index }) {
-
+  console.log(post);
   return (
       <div key={index} className="border rounded-lg overflow-hidden">
         <img
-          src={post.image}
+          src={`https://xfgryarmntclonzbyllo.supabase.co/storage/v1/object/public/post_images/${post?.pictures}`}
           alt={post.title}
           className="w-full h-48 object-cover"
         />
@@ -20,7 +20,6 @@ export default function DisplayBoxes({ post, index }) {
             </Button>
             <Button size="sm" variant="ghost">
               <User className="h-4 w-4" />
-              Salem Iranloye
             </Button>
           </div>
         </div>
