@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { createClient } from "@/util/supabase/server";
 
+const BASE_URL = "https://xfgryarmntclonzbyllo.supabase.co/storage/v1/object/public/post_images/";
+
 async function UploadFile(file) {
   const supabase = createClient()
   console.log("Uploading file:", file.name);
@@ -34,7 +36,7 @@ export async function POST(req) {
 
   const urlIds = uploadResults
     .filter(result => result.status === 'fulfilled' && result.value)
-    .map(result => result.value.path);
+    .map(result => `${BASE_URL}${result.value.path}`);
 
   const fields = Object.fromEntries(formData);
   const category = [fields.category];

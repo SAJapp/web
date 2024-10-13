@@ -13,11 +13,11 @@ export default function Footer() {
                 </Button>
             </Link>
 
-            <Link href="/upload" passHref>
+            {/* <Link href="/upload" passHref>
                 <Button variant="ghost">
                     <Bookmark />
                 </Button>
-            </Link>
+            </Link> */}
 
             <Link href="/upload" passHref>
                 <Button variant="ghost">

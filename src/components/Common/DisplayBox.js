@@ -2,11 +2,13 @@ import { Bookmark, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function DisplayBoxes({ post, index }) {
-  console.log(post);
+  const pictureSrc = Array.isArray(post.pictures) && post.pictures.length > 0 
+  ? post.pictures[0] 
+  : post.pictures;
   return (
       <div key={index} className="border rounded-lg overflow-hidden">
         <img
-          src={`https://xfgryarmntclonzbyllo.supabase.co/storage/v1/object/public/post_images/${post?.pictures}`}
+          src={pictureSrc}
           alt={post.title}
           className="w-full h-48 object-cover"
         />

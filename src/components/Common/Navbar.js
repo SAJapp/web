@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import { Search, User } from 'lucide-react'
 import LoginModal from '@/components/Modals/LoginModal'
@@ -51,7 +52,7 @@ export default function Navbar() {
 
     return(
         <header className="sticky top-0 bg-white z-10 p-4 border-b flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Campus Cart</h1>
+            <Image src="/Logo.jpg" alt="Campus Cart" width={150} height={50} />
             <div className="flex-grow mx-4 max-w-2xl">
                 <div className="relative">
                     <Input
