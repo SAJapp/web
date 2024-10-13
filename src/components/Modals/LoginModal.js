@@ -34,7 +34,7 @@ export default function LoginModal({ handleClose }) {
         try {
             const response = await signup({ email, password });
             if (response?.error) {
-                setError(response.error);  // Display error from server
+                setError(response.error);
                 return;
             }
             handleClose();

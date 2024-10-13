@@ -17,7 +17,6 @@ export async function login(formData) {
 export async function signup(formData) {
   const supabase = createClient()
 
-  console.log(formData)
   const data = {
     email: formData.email,
     password: formData.password,
@@ -26,7 +25,7 @@ export async function signup(formData) {
   console.log(data)
 
   const { error } = await supabase.auth.signUp(data)
-  console.log(error)
+  return error
   // revalidatePath('/', 'layout')
   // redirect('/')
 }

@@ -10,14 +10,14 @@ import { createClient } from '@/util/supabase/client'
 export default function Navbar() {
     const supabase = createClient();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [user, setUser] = useState(null); // State to hold the user data
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown toggle
+    const [user, setUser] = useState(null);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             const { data, error } = await supabase.auth.getUser();
             if (data) {
-                setUser(data.user); // Set the user state
+                setUser(data.user);
             }
         };
         
